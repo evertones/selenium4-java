@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  selenium-hub:
+    image: selenium/hub:4.5.0-20221004
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+    environment:
+      - TZ=Australia/Sydney
+      - JAVA_OPTS=-Xms2g -Xmx4g
+
+  chrome:
+    image: selenium/node-chrome:4.5.0-20221004
+    shm_size: 2gb
+    dns: 8.8.8.8
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - TZ=Australia/Sydney
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
