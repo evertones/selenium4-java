@@ -1,0 +1,34 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:4.0.0-alpha-5-20200525
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    environment:
+      - TZ=Australia/Sydney
+      - JAVA_OPTS=-Xms2g -Xmx6g
+
+  chrome:
+    image: selenium/node-chrome:4.0.0-alpha-5-20200525
+    dns: 8.8.8.8
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - TZ=Australia/Sydney  
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+
+  firefox:
+    image: selenium/node-firefox:4.0.0-alpha-5-20200525
+    dns: 8.8.8.8
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - TZ=Australia/Sydney
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
