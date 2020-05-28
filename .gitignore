@@ -1,0 +1,10 @@
+# Gradle
+.gradle/
+.gradletasknamecache
+.nb-gradle
+
+# Builds
+/build/
+
+# Intellij
+/.idea/
