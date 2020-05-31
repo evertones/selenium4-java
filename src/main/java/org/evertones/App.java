@@ -14,11 +14,11 @@ import java.net.MalformedURLException;
 public class App {
 
     private static final Boolean isRemote = true;
-    private static final Boolean isChrome = false;
+    private static final Boolean isChrome = true;
 
     public static void main(String[] args) throws MalformedURLException {
 
-        WebDriver webDriver = null;
+        WebDriver webDriver;
         if (isChrome) {
             webDriver = new App().getChromeInstance();
         }
